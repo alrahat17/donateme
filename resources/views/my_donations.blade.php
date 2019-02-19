@@ -39,14 +39,14 @@
 							<th>Payment Type</th>
 							<th>Date</th>
 							<th>Payment Status</th>
+							
 						</tr>
 					</thead>
 					<tbody>
-						@foreach ($donations as $donation)
+						@foreach ($donations as $key => $donation)
 						<tr>
-						 <td></td>
+						 <td>{{$key +1 }}</td>
 						 <td>{{$donation->campaign->cam_name}}</td>
-						 {{-- <td>{{$donation->campaign->user->name}}</td> --}}
 						 <td>{{$donation->don_full_name}}</td>
 						 <td>{{$donation->user_email}}</td>
 						 <td>{{$donation->don_amount}}</td>

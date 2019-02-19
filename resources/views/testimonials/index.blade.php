@@ -7,6 +7,9 @@
 }
 </style>
 
+
+
+
 <div class="content mt-3">
 	<div class="animated fadeIn">
 		<div class="row">
@@ -25,7 +28,7 @@
 						<table id="test_table" class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									{{-- <th>Sno</th> --}}
+									<th>Sno</th>
 									<th>Image</th>
 									<th>Name</th>
 									<th>Description</th>
@@ -33,15 +36,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($testimonials as $testimonial)
+								@foreach($testimonials as $key => $testimonial)
 								<tr>
-									{{-- <td>{{$testimonial->id}}</td> --}}
-									<td><img style="height:90px;width: 120px;" src="{{$testimonial->test_img}}" /></td>
+									<td>{{$key +1}}</td>
+									<td><img style="height:45px;width: 60px;" src="{{$testimonial->test_img}}" /></td>
 									<td>{{$testimonial->name}}</td>
 									<td>{{$testimonial->test_des}}</td>
 									<td>
 										<a class="edit" href="{{'/testimonials/'.$testimonial->id.'/edit' }}">
-											<button class="btn btn-info">Edit</i></button>
+											<button class="btn btn-info btn-sm"><i class="fa fa-edit"></i></button>
 										</a>
 										<br><br>
 										<form method="post" action="{{ route('testimonials.destroy', $testimonial->id)}}">
@@ -49,8 +52,9 @@
 											@method('delete')
 
 											<a class="delete" href="{{'/testimonials/'.$testimonial->id}}">
-												<button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure to delete?')">Delete</button>
+												<button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></button>
 											</a>
+										</form>
 										</td>
 									</tr>
 									@endforeach
@@ -77,5 +81,6 @@
 			$('#test_table').DataTable();
 		} );
 	</script>
+	 
 
 	@endsection

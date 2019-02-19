@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+use App\Campaign;
+
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -31,12 +31,8 @@
   	 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 paddingoff">
                     <!-- Advanced Tables -->
                    
-                        <div class="float-left">
-                        <h4 class="bold black ">0 comments found !!!</h4>
-                        </div>
                         
-                        
-                    </div>    
+                   
 				<table id="dataTables-example" class="table table-striped table-bordered table-hover">
 					<thead>
 						<tr>
@@ -47,7 +43,29 @@
 							<th>Status</th>
 							<th>Action</th>
 						</tr>
-					</thead>	
+					</thead>
+          <tbody>
+            @foreach ($comments as $key => $comment)
+            <tr>
+              <td>{{$key +1}}</td>
+              <td>{{isset($comment->blog->title) ? $comment->blog->title : "Post removed!"}}</td>
+              <td>{{$comment->message}}</td>
+              <td>{{$comment->created_at}}</td>
+              <td>
+                @if($comment->status==1)
+                    <span style="color:#0DB053; font-weight:bold;">Active</span>
+                @else
+                     <span style="color:#CB2027; font-weight:bold;">Pending</span>
+                @endif
+              </td>
+              <td>
+                <a class="delete_comment" href="/delete_my_comment/{{$comment->id  }}">
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button> 
+                </a>               
+              </td>
+            </tr>
+             @endforeach
+          </tbody>	
 
 				</table>
 
@@ -58,6 +76,10 @@
 </div>
 </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+      @include('sweet::alert')
+
 
 
 @endsection

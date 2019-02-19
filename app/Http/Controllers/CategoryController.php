@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\HTTP\Requests;
 use Auth;
+use Alert;
 
 class CategoryController extends Controller
 {
@@ -56,6 +57,7 @@ class CategoryController extends Controller
         $category->cat_name = $request->input('cat_name');
         $category->cat_img = $cat_img_fullname;
         $category->save();
+        alert()->success('Success', 'Category Created Successfully.');
         return redirect('/categories');
     }
 
@@ -111,6 +113,7 @@ class CategoryController extends Controller
         }
         $category->cat_name = $request->input('cat_name');
         $category->update();
+        alert()->success('Success', 'Category Updated Successfully.');
         return redirect('/categories');
     }
 
@@ -125,6 +128,7 @@ class CategoryController extends Controller
         $category=Category::find($id);
         $category->delete();
         unlink($category->cat_img);
+        alert()->success('Success', 'Category Deleted Successfully.');
         return redirect('/categories');
         
     }

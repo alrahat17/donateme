@@ -32,9 +32,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($withdrawals as $withdrawal)
+								@foreach($withdrawals as $key => $withdrawal)
 								<tr>
-									<td>{{$withdrawal->id}}</td>
+									<td>{{$key +1}}</td>
 									<td>{{$withdrawal->cam_name}}</td>
 									<td>{{$withdrawal->user_name}}</td>
 									<td>{{$withdrawal->email}}</td>
@@ -48,7 +48,7 @@
 									@if ($withdrawal->payment_status==0)
 								
 									<a class="status" href="{{ URL::to('/com_payment/'.$withdrawal->id) }}">
-										<button class="btn btn-success">Mark As Complete</i></button>
+										<button class="btn btn-success btn-sm">Mark As Complete</i></button>
 									</a></td>
 											
 									@endif									

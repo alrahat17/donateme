@@ -1,7 +1,7 @@
 @extends('layouts.home_layout')
 @section('home_content')
 
-<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
+<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/hero_bg_bw_1.jpg); height:380px; width:1349px;"  data-stellar-background-ratio="0.5">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">

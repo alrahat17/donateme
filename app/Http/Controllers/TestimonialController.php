@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Testimonial;
 use App\HTTP\Requests;
+use Alert;
 
 class TestimonialController extends Controller
 {
@@ -16,6 +17,7 @@ class TestimonialController extends Controller
     public function index()
     {
         $testimonials = Testimonial::all();
+       
         return view('testimonials.index')->with('testimonials',$testimonials);
     }
 
@@ -54,6 +56,9 @@ class TestimonialController extends Controller
         $testimonial->test_des = $request->input('test_des');
         $testimonial->test_img = $test_img_fullname;
         $testimonial->save();
+
+        alert()->success('Success', 'Testimonial Created Successfully.');
+        
         return redirect('/testimonials');
     }
 
@@ -77,7 +82,8 @@ class TestimonialController extends Controller
     public function edit($id)
     {
         $testimonial = Testimonial::find($id);
-        return view('testimonials.edit')->with('testimonial',$testimonial);    }
+        return view('testimonials.edit')->with('testimonial',$testimonial);   
+    }
 
     /**
      * Update the specified resource in storage.
@@ -110,6 +116,7 @@ class TestimonialController extends Controller
         $testimonial->name = $request->input('name');
         $testimonial->test_des = $request->input('test_des');
         $testimonial->update();
+        alert()->success('Success', 'Testimonial Updated Successfully.');
         return redirect('/testimonials');
        
     }
@@ -124,6 +131,7 @@ class TestimonialController extends Controller
     {
         $testimonial = Testimonial::find($id);
         $testimonial->delete();
+        alert()->success('Success', 'Testimonial Deleted Successfully.');
 
         return redirect('/testimonials');
     }

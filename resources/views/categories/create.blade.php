@@ -13,7 +13,7 @@
                           </div>
                          <div class="row form-group">
                             <div class="col col-md-3"><label for="cat_name" class=" form-control-label"> Category Name</label></div>
-                            <div class="col-12 col-md-9"><input type="text" id="cat_name" name="cat_name"  class="form-control{{ $errors->has('cat_name') ? ' is-invalid' : '' }}" value="{{ old('cat_name') }}" required autofocus>
+                            <div class="col-12 col-md-9"><input type="text" id="cat_name" name="cat_name"  class="form-control{{ $errors->has('cat_name') ? ' is-invalid' : '' }}" value="{{ old('cat_name') }}"  autofocus>
                             <span id="error_cat_name"></span>
                             @if ($errors->has('cat_name'))
                               <span class="invalid-feedback" role="alert">
@@ -27,7 +27,7 @@
                                                    
                           <div class="row form-group">
                             <div class="col col-md-3"><label for="cat_img" class=" form-control-label"> Image</label></div>
-                            <div class="col-12 col-md-9"><input type="file" id="cat_img" name="cat_img" class="form-control-file{{ $errors->has('cat_img') ? ' is-invalid' : '' }}" required autofocus>
+                            <div class="col-12 col-md-9"><input type="file" id="cat_img" name="cat_img" class="form-control-file{{ $errors->has('cat_img') ? ' is-invalid' : '' }}"  autofocus>
                               <span id="error_cat_img"></span>
                               <span id="error_cat_img_type"></span>
                                @if ($errors->has('cat_img'))

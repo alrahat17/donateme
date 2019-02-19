@@ -17,22 +17,42 @@
 
 Route::get('/','HomeController@show_welcome_page');
 Route::get('/about','HomeController@show_about_page');
+Route::get('/become_volunteer','HomeController@show_become_volunteer_page');
+Route::get('/contact_us','HomeController@show_contact_us_page');
+Route::post('/save_contact_message','HomeController@save_contact_message');
+Route::get('/give_donation','HomeController@show_give_donation_page');
+Route::get('/give_scholarship','HomeController@show_give_scholarship_page');
+Route::get('/gallery','HomeController@show_gallery_page');
 Route::get('/all_campaigns','HomeController@show_campaigns');
 Route::get('/campaign_by_category/{id}','HomeController@show_campaign_by_category');
 Route::get('/campaign_details/{id}','HomeController@show_campaign_details');
 Route::get('/all_categories','HomeController@show_categories');
 Route::get('/all_blogs','HomeController@show_blogs');
+Route::get('/blog_details/{id}','HomeController@show_blog_details');
+Route::post('/save_comment/{id}','HomeController@save_comment');
 Route::post('/update_profile/{id}','HomeController@update_profile');
 Route::get('/my_comments','HomeController@show_my_comments');
+
+
+Route::get('/delete_my_comment/{id}','HomeController@delete_comment')->name('delete.comment');
+
+
 Route::get('/my_donations','HomeController@show_my_donations');
+
 Route::get('/my_campaigns','HomeController@show_my_campaigns');
 Route::get('/create_campaign','HomeController@create_campaign');
+Route::get('/edit_campaign/{id}','HomeController@edit_campaign');
+Route::post('/update_campaign/{id}','HomeController@update_campaign');
 Route::post('/save_campaign','HomeController@save_campaign');
-Route::get('/create_donation','HomeController@create_donation');
+Route::get('/create_donation/{id}','HomeController@create_donation');
+Route::get('/donation_status','HomeController@donation_status');
+Route::get('/donation_failed','HomeController@donation_failed');
 Route::get('/my_withdrawals','HomeController@show_my_withdrawals');
 Route::post('/charge','HomeController@generate_token');
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+
 Route::get('logout', 'Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -63,9 +83,15 @@ Route::group(['middleware' => 'App\Http\Middleware\AdminMiddleware'], function()
 	Route::resource('campaigns','CampaignController');
 	Route::resource('pages','PageController');
 	Route::resource('blogs','BlogController');
+	Route::get('blog_comments/{id}','BlogController@show_blog_comments');
+	Route::get('active_com/{id}','BlogController@active_com');
+	Route::get('deactive_com/{id}','BlogController@deactive_com');
+	Route::get('/delete_comment/{id}','BlogController@delete_comment');
 	Route::resource('donations','DonationController');
 	Route::resource('testimonials','TestimonialController');
 	Route::get('/com_don/{id}','DonationController@com_donation');
+	Route::get('/approve_cam/{id}','CampaignController@approve_cam');
+	Route::get('/finalize_cam/{id}','CampaignController@finalize_cam');
 	Route::resource('galleries','GalleryController');
 	Route::resource('withdrawals','WithdrawalController');
 	Route::get('/com_payment/{id}','WithdrawalController@com_payment');

@@ -32,14 +32,14 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($categories as $category)
+								@foreach($categories as $key => $category)
 								<tr>
-									<td>{{$category->id}}</td>
+									<td>{{$key +1}}</td>
 									<td><img style="height:90px;width: 120px;" src="{{$category->cat_img}}" /></td>
 									<td>{{$category->cat_name}}</td>
 									<td>
 										<a class="edit" href="{{'/categories/'.$category->id.'/edit' }}">
-											<button class="btn btn-info">Edit</i></button>
+											<button class="btn btn-info btn-sm">Edit</i></button>
 										</a>
 
 										<form method="post" action="{{ route('categories.destroy', $category->id)}}">
@@ -47,8 +47,9 @@
 											@method('delete')
 
 											<a class="delete" href="{{'/categories/'.$category->id}}">
-												<button class="btn btn-danger" type="submit" onclick="return confirm('Are you sure to delete?')">Delete</button>
+												<button class="btn btn-danger btn-sm" type="submit" onclick="return confirm('Are you sure to delete?')">Delete</button>
 											</a>
+										</form>
 										</td>
 									</tr>
 									@endforeach
@@ -72,9 +73,13 @@
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script type="text/javascript">
   
-	$(document).ready( function () {
+$(document).ready( function () {
     $('#cat_table').DataTable();
 	} );
-	</script>
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+      @include('sweet::alert')
+
 
 	@endsection

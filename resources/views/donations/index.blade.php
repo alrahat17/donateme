@@ -31,9 +31,9 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($donations as $donation)
+								@foreach($donations as $key => $donation)
 								<tr>
-									<td>{{$donation->id}}</td>
+									<td>{{$key +1}}</td>
 									<td>{{$donation->campaign->cam_name}}</td>
 									<td>{{$donation->don_full_name}}</td>
 									<td>{{$donation->user_email}}</td>
@@ -45,8 +45,9 @@
 									@if ($donation->payment_status==0)
 								
 									<a class="status" href="{{ URL::to('/com_don/'.$donation->id) }}">
-										<button class="btn btn-success">Mark As Complete</i></button>
-									</a></td>
+										<button class="btn btn-success btn-sm">Mark As Complete</i></button>
+									</a>
+									</td>
 											
 									@endif									
 

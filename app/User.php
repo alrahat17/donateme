@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable 
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name','user_name','email', 'password','phone','user_type','photo'
+        'name','user_name','email', 'password','phone','photo','user_type'
     ];
 
     /**
@@ -37,4 +37,10 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Campaign');
     }
+    public function comment()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
+
 }

@@ -1,5 +1,14 @@
 @extends('layouts.admin_layout')
 @section('admin_content')
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+ <script>
+       tinymce.init({
+      selector: '#mytextarea',
+      menubar: false,
+      
+  });     
+</script>
+
 
 <div class="col-lg-12">
   <div class="card">
@@ -49,48 +58,63 @@
         </div>
 
         <div class="row form-group">
-          <div class="col col-md-3"><label for="user_id" class=" form-control-label"> User Name</label></div>
-          <div class="col-12 col-md-9"><input type="text" id="user_id" name="user_id" class="form-control" value="{{Auth::user()->id}}">
-            <span id="error_user_id"></span>
-          </div>
-        </div>
-
-
-       <div class="row form-group">
-          <div class="col col-md-3"><label for="category_id" class=" form-control-label"> Category</label></div>
-          <div class="col-12 col-md-9">
-            <select name="category_id" id="category_id" class="form-control">
-            <?php
-
-            foreach ($categories as $category) {
-            ?>
-            <option value="{{$category->id}}">{{$category->cat_name}}</option>
-            <?php
-            }
-
-            ?>
-          </select>
-        </div>
-      </div>
-
-
-
-        <div class="row form-group">
-          <div class="col col-md-3"><label for="funds_raised" class=" form-control-label"> Funds Raised</label></div>
-          <div class="col-12 col-md-9"><input type="number" id="funds_raised" name="funds_raised"  class="form-control{{ $errors->has('funds_raised') ? ' is-invalid' : '' }}" value="{{ old('funds_raised') }}" required autofocus>
-            <span id="error_funds_raised"></span>
-            @if ($errors->has('funds_raised'))
+          <div class="col col-md-3"><label for="cam_img_2" class=" form-control-label"> Other Image (Optional)</label></div>
+          <div class="col-12 col-md-9"><input type="file" id="cam_img_2" name="cam_img" class="form-control-file{{ $errors->has('cam_img_2') ? ' is-invalid' : '' }}">
+            <span id="error_cam_img_2"></span>
+            <span id="error_cam_img_type_2"></span>
+            @if ($errors->has('cam_img_2'))
             <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('funds_raised') }}</strong>
+            <strong>{{ $errors->first('cam_img_2') }}</strong>
             </span>
             @endif
           </div>
         </div>
 
+        <div class="row form-group">
+          <div class="col col-md-3"><label for="video" class=" form-control-label"> Video</label></div>
+          <div class="col-12 col-md-9"><input type="url" id="video" name="video" class="form-control{{ $errors->has('video') ? ' is-invalid' : '' }}">
+            <span id="error_video"></span>
+            @if ($errors->has('video'))
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('video') }}</strong>
+            </span>
+            @endif
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col col-md-3"><label for="cam_des" class=" form-control-label">About The Campaign</label></div>
+          <div class="col-12 col-md-9"><textarea class="form-control{{ $errors->has('cam_des') ? ' is-invalid' : '' }}" id="mytextarea" name="cam_des" rows="12" value="{{ old('cam_des') }}">{{old('cam_des')}}</textarea>
+            <span id="error_cam_des"></span>
+            </div>
+            @if ($errors->has('cam_des'))
+            <span class="invalid-feedback" role="alert">
+            <strong>{{ $errors->first('cam_des') }}</strong>
+            </span>
+            @endif
+          </div>
+        </div>
+
+       <div class="row form-group">
+          <div class="col col-md-3"><label for="category_id" class=" form-control-label"> Category</label></div>
+          <div class="col-12 col-md-9">
+            <select name="category_id" id="category_id" class="form-control">
+            
+            
+            @foreach ($categories as $category) 
+          
+           <option value="{{ $category->id }}" @if (old('category_id') == $category->id) selected="selected" @endif>{{ $category->cat_name }}</option>
+            
+            @endforeach
+          
+          </select>
+        </div>
+      </div>
+
 
         <div class="row form-group">
           <div class="col col-md-3"><label for="goal" class=" form-control-label"> Goal</label></div>
-          <div class="col-12 col-md-9"><input type="number" id="goal" name="goal"  class="form-control{{ $errors->has('goal') ? ' is-invalid' : '' }}" value="{{ old('goal') }}" required autofocus>
+          <div class="col-12 col-md-3"><input type="number" id="goal" name="goal"  class="form-control{{ $errors->has('goal') ? ' is-invalid' : '' }}" value="{{ old('goal') }}" required autofocus>
             <span id="error_goal"></span>
             @if ($errors->has('goal'))
             <span class="invalid-feedback" role="alert">
@@ -100,43 +124,20 @@
           </div>
         </div>
 
-      
 
         <div class="row form-group">
-          <div class="col col-md-3"><label for="select" class=" form-control-label"> Status</label></div>
-          <div class="col-12 col-md-9">
-           <select name="cam_status" id="cam_status" class="form-control{{ $errors->has('cam_status') ? ' is-invalid' : '' }}" >
-            <option value="Active"@if(old('cam_status') == 'Active') {{ 'selected' }} @endif>Active</option>
-            <option value="Finalized"@if(old('cam_status') == 'Finalized') {{ 'selected' }} @endif>Finalized</option>          
-          </select>
-          @if ($errors->has('cam_status'))
+          <div class="col col-md-3"><label for="cam_date" class=" form-control-label"> Date</label></div>
+          <div class="col-12 col-md-9"><input type="date" id="cam_date" name="cam_date"  class="form-control{{ $errors->has('cam_date') ? ' is-invalid' : '' }}" value="{{ old('cam_date') }}" required autofocus>
+            <span id="error_cam_date"></span>
+            @if ($errors->has('cam_date'))
             <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('cam_status') }}</strong>
+            <strong>{{ $errors->first('cam_date') }}</strong>
             </span>
             @endif
+          </div>
         </div>
-      </div>
 
-
-      <div class="row form-group">
-          <div class="col col-md-3"><label for="select" class=" form-control-label"> Approve Campaign?</label></div>
-          <div class="col-12 col-md-9">
-           <select name="approve_cam" id="approve_cam" class="form-control{{ $errors->has('approve_cam') ? ' is-invalid' : '' }}">
-            <option value="No" @if(old('approve_cam') == 'No') {{ 'selected' }} @endif>No</option>
-            <option value="Yes" @if(old('approve_cam') == 'Yes') {{ 'selected' }} @endif>Yes</option>           
-         </select>
-          @if ($errors->has('approve_cam'))
-            <span class="invalid-feedback" role="alert">
-            <strong>{{ $errors->first('approve_cam') }}</strong>
-            </span>
-            @endif
-        </div>
-      </div>
-
-
-
-
-
+     
       <div class="card-footer">
         <button type="submit" class="btn btn-primary btn-sm">
           <i class="fa fa-dot-circle-o"></i> Submit
@@ -180,20 +181,6 @@
           }
           })
 
-          $('#funds_raised').blur(function(){
-          var error_funds_raised = '';
-          var funds_raised = $('#funds_raised').val();
-          if(funds_raised.length==''){
-           $('#error_funds_raised').html('<label class="text-danger"><h6><small>Funds raised cannot be empty</small></h6></label>');
-           $('#funds_raised').addClass('has-error');
-           $('#register').attr('disabled',false );
-          }
-          else{
-             $('#error_funds_raised').html('');
-             $('#funds_raised').removeClass('has-error');
-             $('#register').attr('disabled', 'disabled');
-          }
-          })
 
           $('#goal').blur(function(){
           var error_goal = '';
@@ -209,6 +196,22 @@
              $('#register').attr('disabled', 'disabled');
           }
           })
+
+          $('#cam_date').blur(function(){
+          var error_cam_date = '';
+          var cam_date = $('#cam_date').val();
+          if(cam_date.length==''){
+           $('#error_cam_date').html('<label class="text-danger"><h6><small><i>Campaign Date cannot be empty</i></small></h6></label>');
+           $('#cam_date').addClass('has-error');
+           $('#register').attr('disablt be empty</i>ed',false );
+          }
+          else{
+             $('#error_cam_date').html('');
+             $('#goal').removeClass('has-error');
+             $('#register').attr('disabled', 'disabled');
+          }
+          })
+
 
           $('#cam_img').blur(function(){
           var error_cam_img = '';
@@ -242,8 +245,52 @@
           }
           })
 
+          $('#cam_img_2').blur(function(){
+          var error_cam_img_2 = '';
+          var error_cam_img_type_2 = '';
+          var file_size = $('#cam_img_2')[0].files[0].size;
+          var file = this.files[0];
+          var fileType = file["type"];
+          //alert(fileType);
+          var validImageTypes = ["image/jpg", "image/jpeg", "image/png"];
+          if ($.inArray(fileType, validImageTypes) < 0) {
+              // invalid file type code goes here.
+              $('#error_cam_img_type_2').html('<label class="text-danger"><h6><small><i>Invalid Type image</i></small></h6></label>');
+              $('#cam_img_2').addClass('has-error');
+              $('#register').attr('disabled',false );
+            }
+          else{
+            //alert('success');
+             $('#error_cam_img_type_2').html('');
+             $('#cam_img_2').removeClass('has-error');
+             $('#register').attr('disabled', 'disabled');
+          }
+          if(file_size>1000000){
+           $('#error_cam_img_2').html('<label class="text-danger"><h6><small><i>Image Size Exceeds</i></small></h6></label>');
+           $('#cam_img_2').addClass('has-error');
+           $('#register').attr('disabled',false );
+          }
+          else{
+             $('#error_cam_img_2').html('');
+             $('#cam_img_2').removeClass('has-error');
+             $('#register').attr('disabled', 'disabled');
+          }
+          })
 
-         
+          $('#cam_des').blur(function(){
+          var error_cam_des = '';
+          var cam_des = $('#cam_des').val();
+          if(cam_des.length==''){
+           $('#error_cam_des').html('<label class="text-danger"><h6><small><i>Campaign Description cannot be empty</i></small></h6></label>');
+           $('#cam_des').addClass('has-error');
+           $('#register').attr('disabled',false );
+          }
+          else{
+             $('#error_cam_des').html('');
+             $('#cam_des').removeClass('has-error');
+             $('#register').attr('disabled', 'disabled');
+          }
+          })
 
         })
       </script>

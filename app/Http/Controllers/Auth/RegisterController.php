@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admins';
+    protected $redirectTo = '/login';
 
     /**
      * Create a new controller instance.
@@ -49,12 +49,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'user_name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255','min:5'],
+            'user_name' => ['required', 'string', 'max:255','min:3'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'phone' =>['required','string'],
+            'phone' =>['required','string','min:7'],
             'user_type' =>['required','string'],
-            'photo' =>['image','mimes:jpeg,jpg,png','max:2000'],
+            'photo' =>['image','mimes:jpeg,jpg,png','max:1000'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -67,7 +67,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {    
-        $request = request();  
+        $request = request(); 
+
      if ($request->hasFile('photo')) {       
         $profileImage = $request->file('photo');
         $profileImageSaveAsName = time().$profileImage->getClientOriginalExtension();
@@ -75,10 +76,15 @@ class RegisterController extends Controller
         $profile_image_url = $upload_path . $profileImageSaveAsName;
         $success = $profileImage->move($upload_path, $profileImageSaveAsName);        
         }
+    else{
 
-     if (!file_exists('photo')) {
-            $profile_image_url = 'user_photo/1543383598-profile.png';
+        $profile_image_url = 'user_photo/1543383598-profile.png';
+
         }
+
+       
+    
+
             
         return User::create([
             'name' => $data['name'],
@@ -89,5 +95,24 @@ class RegisterController extends Controller
             'photo' => $profile_image_url,
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function check(Request $request)
+    {
+     if($request->get('email'))
+     {
+      $email = $request->get('email');
+      $data = DB::table("users")
+       ->where('email', $email)
+       ->count();
+      if($data > 0)
+      {
+       echo 'not_unique';
+      }
+      else
+      {
+       echo 'unique';
+      }
+     }
     }
 }

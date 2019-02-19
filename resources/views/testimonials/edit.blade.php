@@ -62,6 +62,10 @@
         </div>
 
 <script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+      @include('sweet::alert')
+
 
       <script type="text/javascript">
         $(document).ready(function(){
@@ -131,6 +135,10 @@
 
         })
       </script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+      @include('sweet::alert')
+
 
 
 

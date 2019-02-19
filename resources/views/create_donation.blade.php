@@ -31,7 +31,7 @@
 
 </style>
 
-<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/hero_bg_bw_1.jpg); height:380px; width:1349px;"  data-stellar-background-ratio="0.5">
+<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(/donate_front/img/hero_bg_bw_1.jpg); height:380px; width:1349px;"  data-stellar-background-ratio="0.5">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
@@ -73,15 +73,20 @@
     		<div class="col-md-6" id="card-errors" role="alert"></div>     
           </div>
 
+         
           <div class="form-group">
             <label class="col-md-4 control-label" for="don_amount">Amount</label>
             <div class="col-md-2">
-              <input type="number" class="form-control" id="don_amount" name="don_amount" >
+              <input type="number" class="form-control" id="don_amount" name="don_amount" min="{{$min_amount}}" max="{{$max_amount}}">
+              <h6><small><i>(Min {{$min_amount}} , Max {{$max_amount}})</i></small></h6>
             </div>
-            <!-- Used to display form errors. -->
-    		   
-          </div>
+        </div>
 
+           
+            <div class="col-md-4">
+              <input type="hidden" class="form-control" id="cam_id" name="cam_id" value="{{$campaign->id}}">  
+            </div>
+       
          
           <div class="col-md-6 col-md-offset-4">
             <button>Submit</button>
@@ -175,6 +180,9 @@ function stripeTokenHandler(token) {
 
 }
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+@include('sweet::alert')
 
 
 @endsection

@@ -2,7 +2,7 @@
 @section('home_content')
 
 
-<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/hero_bg_bw_1.jpg)"  data-stellar-background-ratio="0.5">
+<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/hero_bg_bw_1.jpg); height:380px; width:1349px;"  data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -34,8 +34,8 @@
             <div class="col-md-5 col-md-pull-6 news-entry probootstrap-animate">
               <h2 class="mb0"><a href="#">{{$blog->title}}</a></h2>
               <p class="probootstrap-news-date">{{$blog->created_at}} by Admin</p>
-              <p>{{$blog->body}}</p>
-              <p><span class="probootstrap-meta-share"><a href="#"><i class="icon-redo2"></i> 14</a> <a href="#"><i class="icon-bubbles2"></i> 7</a></span> <a href="#" class="btn btn-black">Read More...</a></p>
+              <p>{!! substr($blog->body,0,100) !!}.....</p>
+              <p><span class="probootstrap-meta-share"><a href="#"><i class="icon-redo2"></i> 14</a> <a href="#"><i class="icon-bubbles2"></i> 7</a></span> <a href="/blog_details/{{$blog->id}}" class="btn btn-black">Read More...</a></p>
             </div>
           </div>
         	
@@ -56,8 +56,8 @@
             <div class="col-md-5 col-md-push-1  news-entry probootstrap-animate">
               <h2 class="mb0"><a href="#">{{$blog->title}}</a></h2>
               <p class="probootstrap-news-date">{{$blog->created_at}} by Admin</p>
-              <p>{{$blog->body}}</p>
-              <p><span class="probootstrap-meta-share"><a href="#"><i class="icon-redo2"></i> 14</a> <a href="#"><i class="icon-bubbles2"></i> 7</a></span> <a href="#" class="btn btn-black">Read More...</a></p>
+              <p>{{substr($blog->body,0,100)}}.....</p>
+              <p><span class="probootstrap-meta-share"><a href="#"><i class="icon-redo2"></i> 14</a> <a href="#"><i class="icon-bubbles2"></i> 7</a></span> <a href="/blog_details/{{$blog->id}}" class="btn btn-black">Read More...</a></p>
             </div>
           </div>
 
@@ -66,11 +66,17 @@
           ?>
 
         @endforeach		
-   
-
-
         </div>
+
+
+    <div class="text-center">
+      {{ $blogs->links() }} 
+    </div>
+    
+
+
       </section>
 
+      
 
 @endsection

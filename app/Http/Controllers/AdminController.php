@@ -38,7 +38,7 @@ class AdminController extends Controller
         return Datatables::of($users)
 
         ->addColumn('action', function ($user) {
-            return '<a href="/users/'.$user->id.'/edit" class="btn btn-primary"><i class="fa fa-edit"></i></a><a href="/delete_user/'.$user->id.'" class="btn btn-danger"><i class="fa fa-trash"></i></a>';
+            return '<a href="/users/'.$user->id.'/edit" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> </a><a href="/delete_user/'.$user->id.'" class="btn btn-danger btn-sm"  onclick="return confirm("Are you sure to delete?")"><i class="fa fa-trash"></i></a>';
         })
 
 
@@ -73,17 +73,12 @@ class AdminController extends Controller
         $photo_fullname = $upload_path.$photo_name;
         $photo->move($upload_path,$photo_fullname);                
         }
+        else{
+          $photo_fullname = 'user_photo/1543383598-profile.png';
 
-        if (!file_exists('photo')) {
-            $photo_fullname = 'user_photo/1543383598-profile.png';
         }
-        
-       
-       
 
        
-
-
         $user = new User;
         $user->name = $request->input('name');
         $user->user_name = $request->input('user_name');
@@ -146,7 +141,8 @@ class AdminController extends Controller
         ->delete();
         
         //unlink($user->photo);
-        return Redirect('/users')->with('alert','User Deleted');
+        alert()->success('Success', 'User Deleted Successfully.');
+        return Redirect('/all_user')->with('alert','User Deleted');
     }
 
     public function check(Request $request)

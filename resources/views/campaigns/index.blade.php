@@ -21,7 +21,7 @@
 						<strong class="card-title">Campaign Table</strong>
 					</div>
 					<div class="card-body">
-						<table id="cam_table" class="table table-bordered  table-striped">
+						<table id="cam_table" class="table table-bordered  table-striped table-responsive">
 							<thead>
 								<tr>
 									<th>Sno</th>
@@ -39,22 +39,47 @@
 								</tr>
 							</thead>
 							<tbody>
-								@foreach($campaigns as $campaign)
+								@foreach($campaigns as $key => $campaign)
 								<tr>
-									<td>{{$campaign->id}}</td>
-									<td><img style="height:90px;width: 120px;" src="{{$campaign->cam_img}}" /></td>
+									<td>{{$key +1 }}</td>
+									<td><img style="height:45px;width: 60px;" src="{{$campaign->cam_img}}" /></td>
 									<td>{{$campaign->cam_name}}</td>
 									<td>{{$campaign->cam_loc}}</td>
 									<td>{{$campaign->user->name}}</td>
-									<td>{{$campaign->category->cat_name}}</td>
+									<td>{{isset($campaign->category->cat_name) ? $campaign->category->cat_name : "Category removed!"}}</td>
+									
+									
 									<td>{{$campaign->funds_raised}}</td>
 									<td>{{$campaign->goal}}</td>
-									<td>{{$campaign->created_at}}</td>
-									<td>{{$campaign->cam_status}}</td>
-									<td>{{$campaign->approve_cam}}</td>
+									<td>{{$campaign->cam_date}}</td>
+									<td>
+										
+									@if($campaign->cam_status==0)
+										<span class="label label-warning" style="color:#CB2027; font-weight:bold;">Inactive</span>
+									
+									@elseif($campaign->cam_status==1)
+										<span class="label label-success" style="color:#0DB053; font-weight:bold;">Active</span>
+									@else($campaign->cam_status==2)
+										<span class="label label-danger" style="color:#CB2027; font-weight:bold;">Finalized</span>
+									@endif
+										
+									</td>
+									<td>
+									@if (($campaign->cam_date)<($current_date) && $campaign->cam_status == 1))
+										<a class="status" href="{{ URL::to('/finalize_cam/'.$campaign->id) }}">
+										<button class="btn btn-warning btn-sm">Finalize </button>
+									</a></td>
+									@endif
+									@if ($campaign->cam_status == 0)
+										<a class="status" href="{{ URL::to('/approve_cam/'.$campaign->id) }}">
+										<button class="btn btn-success btn-sm"> Approve</button>
+									</a></td>
+									@endif
+										
+									</td>
 									<td>
 										<a class="edit" href="{{'/campaigns/'.$campaign->id.'/edit' }}">
-											<button class="btn btn-info"><i class="fa fa-edit"></i></button>
+											<button class="btn btn-info btn-sm"><i class="fa fa-edit"></i></button>
 										</a>
 
 										<form method="post" action="{{ route('campaigns.destroy', $campaign->id)}}">
@@ -62,8 +87,9 @@
 											@method('delete')
 
 											<a class="delete" href="{{'/campaigns/'.$campaign->id}}">
-												<button class="btn btn-danger"><i class="fa fa-trash btn-danger" type="submit" onclick="return confirm('Are you sure to delete?')"></i></button>
+												<button class="btn btn-danger btn-sm"><i class="fa fa-trash btn-danger" type="submit" onclick="return confirm('Are you sure to delete?')"></i></button>
 											</a>
+										</form>
 										</td>
 									</tr>
 									@endforeach
@@ -91,6 +117,10 @@
     $('#cam_table').DataTable();
 	} );
 	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+      @include('sweet::alert')
+
 
 
 @endsection

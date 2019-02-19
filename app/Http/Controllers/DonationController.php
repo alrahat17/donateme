@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Donation;
 use App\HTTP\Requests;
+use App\Category;
+use App\Campaign;
+use App\Donation;
+use Illuminate\Support\Facades\DB;
 use Auth;
 
 
@@ -89,8 +92,7 @@ class DonationController extends Controller
     }
 
     public function com_donation(Request $request,$id){
-
-
+        
         $donation = Donation::find($id);
         $donation->where('id',$id)->update(['payment_status'=>1]);
         return redirect('/donations');

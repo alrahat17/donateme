@@ -1,6 +1,17 @@
 @extends('layouts.admin_layout')
 @section('admin_content')
 
+<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+  <script>
+       tinymce.init({
+      selector: '#mytextarea',
+      menubar: false,
+      
+  });
+      
+      
+</script>
+
 <div class="col-lg-12">
   <div class="card">
     <div class="card-header">
@@ -25,7 +36,7 @@
 
         <div class="row form-group">
           <div class="col col-md-3"><label for="body" class=" form-control-label">Body</label></div>
-          <div class="col-12 col-md-9"><textarea name="body" id="body" rows="3" class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" value="{{ old('body') }}" required autofocus></textarea>
+          <div class="col-12 col-md-9"><textarea name="body" id="mytextarea" rows="9" class="form-control{{ $errors->has('body') ? ' is-invalid' : '' }}" value="{{ old('body') }}" required autofocus></textarea>
             <span id="error_body"></span>
             @if ($errors->has('body'))
             <span class="invalid-feedback" role="alert">
@@ -57,6 +68,8 @@
       </div>
 
       <script src="https://code.jquery.com/jquery.js"></script>
+
+      
 
       <script type="text/javascript">
         $(document).ready(function(){

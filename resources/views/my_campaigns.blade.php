@@ -37,38 +37,43 @@
 							<th>Funds Raised</th>
 							<th>Goal</th>
 							<th>Status</th>
-							<th>Approve Status</th>
 							<th>Actions</th>
+							
 						</tr>
 					</thead>
 						<tbody>
-						@foreach ($campaigns as $campaign)
+						@foreach ($campaigns as $key => $campaign)
 							{{-- expr --}}
 					
 							<tr>
-								<td></td>								
+								<td>{{$key + 1 }}</td>								
 								<td><img style="height:45px;width: 60px;" src="{{$campaign->cam_img}}" /></td>
-								<td>{{$campaign->cam_name}}</td>
+								<td><a href="/campaign_details/{{$campaign->id}}">{{$campaign->cam_name}}</a></td>
 								<td>{{$campaign->category->cat_name}}</td>
 								<td>{{$campaign->funds_raised}}</td>
 								<td>{{$campaign->goal}}</td>
 								<td>
-								@if ($campaign->cam_status == 0)
-								<span style="color:#CB2027; font-weight:bold;">Finalized</span>
-								@else($campaign->cam_status == 1)
-								<span style="color:#0DB053; font-weight:bold;">Active</span>
+								@if($campaign->cam_status==0)
+										<span style="color:#CB2027; font-weight:bold;">Inactive</span>
+								@endif
+								@if($campaign->cam_status==1)
+									@if(($campaign->cam_date)>($current_date))
+										<span  style="color:#0DB053; font-weight:bold;">Active</span>
+									@else
+										<span  style="color:#CB2027; font-weight:bold;">Finalized</span>
+									@endif
 								@endif
 									
 								</td>
 								<td>
-								@if ($campaign->approve_cam == 0)
-								<span style="color:#CB2027; font-weight:bold;">Pending</span>
-								@else($campaign->approve_cam == 1)
-								<span style="color:#0DB053; font-weight:bold;">Approved</span>
-								@endif
+								<a class="edit" href="{{'/edit_campaign/'.$campaign->id}}">
+								<i class="btn btn-info">Edit</i>
+								</a>
 								</td>
+
 							</tr>
 						@endforeach
+								
 						</tbody>	
 
 				</table>

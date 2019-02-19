@@ -51,6 +51,10 @@
             
       </section>
 
+       <div class="text-center">
+         {{ $campaigns->links() }} 
+        </div>
+
       
 
 @endsection

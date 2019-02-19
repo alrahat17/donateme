@@ -23,8 +23,8 @@ class CreateCampaignsTable extends Migration
             $table->integer('category_id');
             $table->integer('funds_raised')->default(0);
             $table->integer('goal');
-            $table->string('cam_status')->default(1);
-            $table->integer('approve_cam')->default(0);
+            $table->date('cam_date');
+            $table->string('cam_status')->default(0);
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('layouts.home_layout')
 @section('home_content')
 
-<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/robert-collinsxxs6464.jpg)"  data-stellar-background-ratio="0.5">
+<section class="probootstrap-hero probootstrap-hero-inner" style="background-image: url(donate_front/img/hero_bg_bw_1.jpg); height:380px; width:1349px;"  data-stellar-background-ratio="0.5">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -17,7 +17,7 @@
         <div class="container">
           <div class="row mb40">
             <div class="col-md-6 col-md-push-6 probootstrap-animate">
-              <p><img src="img/img_sq_1.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive"></p>
+              <p><img src="donate_front/img/anna-kolosyuk-551398-unsplaeesh.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive"></p>
             </div>
             <div class="col-md-5 col-md-pull-6 probootstrap-animate">
               <h2>Our Story</h2>
@@ -29,7 +29,7 @@
 
           <div class="row">
             <div class="col-md-6 probootstrap-animate">
-              <p><img src="img/img_sq_2.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive"></p>
+              <p><img src="donate_front/img/annie-spratt-548190-unhhsplash.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive"></p>
             </div>
             <div class="col-md-5 col-md-push-1 probootstrap-animate">
               <h2>Our Mission</h2>
@@ -53,7 +53,7 @@
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-6 probootstrap-animate">
               <a href="#" class="probootstrap-team">
-                <img src="img/person_1.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive">
+                <img src="donate_front/img/person_1.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive">
                 <div class="probootstrap-team-info">
                   <h3>Jeremy Slater <span class="position">Partner/CEO</span></h3>
                 </div>
@@ -61,7 +61,7 @@
             </div>
             <div class="col-md-3 col-sm-6 col-xs-6 probootstrap-animate">
               <a href="#" class="probootstrap-team">
-                <img src="img/person_2.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive">
+                <img src="donate_front/img/person_2.jpg" alt="Free Bootstrap Template by uicookies.com" class="img-responsive">
                 <div class="probootstrap-team-info">
                   <h3>James Butterly <span class="position">Partner/CTO</span></h3>
                 </div>
@@ -96,7 +96,7 @@
       <section class="probootstrap-half">
         <div class="image">
           <div class="image-bg">
-            <img src="{{URL::to('donate_front/img/img_sq_5_big.jpg')}}img/img_sq_5_big.jpg" alt="Free Bootstrap Template by uicookies.com">
+            <img src="{{URL::to('donate_front/img/myles-tan-84040-unsrrplash.jpg')}}" alt="Free Bootstrap Template by uicookies.com">
           </div>
         </div>
         <div class="text">

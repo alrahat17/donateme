@@ -9,7 +9,7 @@
 
 .bgimg {
     /* Background image */
-    background-color:darkgray;
+    background-color:black;
     /* Full-screen */
     height: 100%;
     /* Center the background image */
